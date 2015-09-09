@@ -1,4 +1,4 @@
 # capstonegroupproject
 Capstone group project for William, Steven, Achyut and Saroja
 
-Initial commit
+Initial commit for git
