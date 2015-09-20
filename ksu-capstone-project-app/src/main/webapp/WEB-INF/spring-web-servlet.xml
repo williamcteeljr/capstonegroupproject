@@ -18,12 +18,13 @@
 			<value>/WEB-INF/views/jsp/</value>
 		</property>
 		<property name="suffix">
-			<value>.jsp</value>
+			<value>.html</value>
 		</property>
 	</bean>
 
 	<mvc:resources mapping="/resources/**" location="/resources/" />
  
 	<mvc:annotation-driven />
+	<mvc:default-servlet-handler/>
 	
 </beans>
