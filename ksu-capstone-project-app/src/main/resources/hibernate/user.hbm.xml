@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.capstone.project.model"
+	default-cascade="none" auto-import="true" default-lazy="false" catalog="familydonations"
+	schema="dbo">
+	
+	<sql-query name="getUserByUserIdAndPassword">
+		<return-scalar column="RegisteredUserId" type="long" />
+		<return-scalar column="LastName" type="string" />
+		<return-scalar column="FirstName" type="string" />
+		<return-scalar column="LoginUserId" type="string" />
+		<return-scalar column="Password" type="string" />
+		<return-scalar column="FamilyId" type="long" />
+		<return-scalar column="Gender" type="string" />
+		<return-scalar column="DateOfBirth" type="date" />
+		<return-scalar column="UserType" type="string" />
+		<return-scalar column="CreatedDate" type="timestamp" />
+        <![CDATA[
+            select RegisteredUserId, LastName, FirstName, LoginUserId, Password, FamilyId, Gender, DateOfBirth, UserType, CreatedDate 
+            from registereduser where LoginUserId = :loginUserId and Password = :password
+        ]]>
+	</sql-query>	
+	
+</hibernate-mapping>	

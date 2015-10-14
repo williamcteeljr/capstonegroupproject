@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://cxf.apache.org/jaxrs 
+		http://cxf.apache.org/schemas/jaxrs.xsd">
+
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+	
+    <bean id="jacksonJsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJsonProvider">
+        <constructor-arg>
+            <ref bean="jacksonObjectMapper"/>
+        </constructor-arg>
+   </bean>
+   <bean id="jacksonObjectMapper" class="org.codehaus.jackson.map.ObjectMapper" />
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject" ref="jacksonObjectMapper" />
+        <property name="targetMethod" value="configure" />
+        <property name="arguments">
+            <list>
+                <value type="org.codehaus.jackson.map.DeserializationConfig.Feature">ACCEPT_SINGLE_VALUE_AS_ARRAY</value>
+                <value>true</value>
+            </list>
+        </property>
+    </bean>			       
+
+	<!-- RESTful Web Service Configuration -->
+	<jaxrs:server id="restContainer" address="/">
+		<jaxrs:serviceBeans>	
+			<ref bean="com.capstone.project.webservice.rest.FamilyWebservice" />
+			<ref bean="com.capstone.project.webservice.rest.UserWebservice" />
+		</jaxrs:serviceBeans>
+		<jaxrs:providers>
+			<ref bean="jacksonJsonProvider" />
+		</jaxrs:providers>
+	</jaxrs:server>
+	
+    <bean id="com.capstone.project.webservice.rest.FamilyWebservice"
+          class="com.capstone.project.webservice.rest.FamilyWebservice">
+        <property name="familyService">
+            <ref bean="com.capstone.project.service.FamilyService" />
+        </property>
+    </bean>	
+    <bean id="com.capstone.project.webservice.rest.UserWebservice"
+          class="com.capstone.project.webservice.rest.UserWebservice">
+        <property name="userService">
+            <ref bean="com.capstone.project.service.UserService" />
+        </property>
+    </bean>	 
+    
+	<!-- Wire the advice to the application code -->
+	<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames">
+			<list>
+				<value>com.capstone.project.webservice.rest.FamilyWebservice</value>
+				<value>com.capstone.project.webservice.rest.UserWebservice</value>
+			</list>
+		</property>
+	</bean>
+				                
+
+</beans>

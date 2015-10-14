@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.capstone.project.model"
+	default-cascade="none" auto-import="true" default-lazy="false" catalog="familydonations"
+	schema="dbo">
+	
+	<sql-query name="getFamilies">
+		<return-scalar column="FamilyId" type="long" />
+		<return-scalar column="FamilyName" type="string" />
+		<return-scalar column="Address1" type="string" />
+		<return-scalar column="Address2" type="string" />
+		<return-scalar column="City" type="string" />
+		<return-scalar column="State" type="string" />
+		<return-scalar column="Zip" type="string" />
+		<return-scalar column="ContactPhone" type="string" />
+		<return-scalar column="Email" type="string" />
+		<return-scalar column="CreatedDate" type="timestamp" />
+        <![CDATA[
+            select FamilyId, FamilyName, Address1, Address2, City, State, Zip, ContactPhone, Email, CreatedDate
+            from Family
+        ]]>
+	</sql-query>		
+	
+</hibernate-mapping>	
