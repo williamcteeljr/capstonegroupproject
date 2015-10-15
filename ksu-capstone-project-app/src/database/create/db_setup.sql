@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `familydonations`.`Family` (
   `Zip` VARCHAR(45) NULL DEFAULT NULL COMMENT '',
   `ContactPhone` VARCHAR(45) NULL DEFAULT NULL COMMENT '',
   `Email` VARCHAR(45) NULL DEFAULT NULL COMMENT '',
-  `CreatedDate` DATE NOT NULL COMMENT '',
+  `CreatedDate` DATETIME NOT NULL COMMENT '',
   PRIMARY KEY (`FamilyId`)  COMMENT '')
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -53,7 +53,10 @@ CREATE TABLE IF NOT EXISTS `familydonations`.`RegisteredUser` (
   `LoginUserId` VARCHAR(45) NOT NULL COMMENT '',
   `Password` VARCHAR(65) NOT NULL COMMENT 'PW is SHA-256 hash',
   `FamilyId` INT NULL COMMENT 'The ID of a row in the Family table that links this RegisteredUser as a member of the Family.',
-  `CreatedDate` DATE NOT NULL COMMENT '',
+  `Gender` VARCHAR(15) COMMENT '',
+  `DateOfBirth` DATE COMMENT '',
+  `UserType` VARCHAR(30) COMMENT '',
+  `CreatedDate` DATETIME NOT NULL COMMENT '',
   PRIMARY KEY (`RegisteredUserId`)  COMMENT '')
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -92,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `familydonations`.`WishListItem` (
   `WishListId` INT(11) NOT NULL COMMENT '',
   `Description` VARCHAR(45) NULL DEFAULT NULL COMMENT '',
   `CurrentStatusId` INT(11) NOT NULL DEFAULT '-1' COMMENT '-1 = available for donation\n-2 = committed by doner',
-  `CreatedDate` DATE NOT NULL COMMENT '',
+  `CreatedDate` DATETIME NOT NULL COMMENT '',
   PRIMARY KEY (`WishListItemId`)  COMMENT '',
   INDEX `FK_WishList_idx` (`WishListId` ASC)  COMMENT '',
   CONSTRAINT `FK_WishList`
@@ -119,25 +122,25 @@ CREATE TABLE IF NOT EXISTS `familydonations`.`WishListApprovalQueue` (
   `WishListApprovalQueueId` INT NOT NULL COMMENT '',
   `WishListId` VARCHAR(45) NOT NULL COMMENT 'The family wish list needing approval.',
   `RegisteredUserId` VARCHAR(45) NOT NULL COMMENT 'The registered user responsible for approving this wishlist.',
-  `CreatedDate` DATE NOT NULL COMMENT '',
+  `CreatedDate` DATETIME NOT NULL COMMENT '',
   PRIMARY KEY (`WishListApprovalQueueId`)  COMMENT '')
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `familydonations`.`PublishedWishList` (
   `PublishedWishListId` INT NOT NULL COMMENT '',
   `WishListId` INT NOT NULL COMMENT 'The wish list that has been approved.',
-  `CreatedDate` DATE NOT NULL COMMENT '',
+  `CreatedDate` DATETIME NOT NULL COMMENT '',
   `RegisteredUserId` INT NULL COMMENT 'The registered user that approved this wish list.',
   PRIMARY KEY (`PublishedWishListId`, `WishListId`)  COMMENT '')
 ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `familydonations`.`TransactionHistory` (
+CREATE TABLE IF NOT EXISTS `familydonations`.`DonorTransactionHistory` (
   `TransactionId` INT NOT NULL COMMENT '',
   `TransactionDesc` VARCHAR(45) NOT NULL COMMENT '',
-  `TransactionDate` VARCHAR(45) NOT NULL COMMENT 'The date the transaction was completed.',
+  `TransactionDate` DATETIME NOT NULL COMMENT 'The date the transaction was completed.',
   `RegisteredUserId` VARCHAR(45) NOT NULL COMMENT 'Registered user this transaction belongs to.',
   PRIMARY KEY (`TransactionId`)  COMMENT '')
-ENGINE = InnoDB;
+ENGINE = InnoDB
 
 CREATE TABLE IF NOT EXISTS `familydonations`.`RegisteredUserRoles` (
   `RegisteredUserId` INT NOT NULL COMMENT 'PKEY id of a registered user. First part of a composite PK.',
@@ -170,7 +173,7 @@ INSERT INTO `familydonations`.`RolePermissions` VALUES (1, 1, 'ADMIN', 1);
 
 /* insert registered user 'admin' */
 /* pw is a SHA-256 hash of the string 'admin' */
-INSERT INTO `familydonations`.`RegisteredUser` VALUES (1, 'Admin', 'User', 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', NULL, CURDATE()); 
+INSERT INTO `familydonations`.`RegisteredUser` VALUES (1, 'Admin', 'User', 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', NULL, 'Male', '1959-06-30', 'ADMIN', NOW()); 
 
 /* insert row in relational table to link user 'admin' with user role 'ADMIN' and permissions for role 'ADMIN' */
 INSERT INTO `familydonations`.`RegisteredUserRoles` VALUES (1, 1);

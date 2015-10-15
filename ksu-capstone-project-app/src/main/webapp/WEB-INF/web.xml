@@ -1,44 +1,69 @@
-<web-app xmlns="http://java.sun.com/xml/ns/javaee" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
-	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-	version="2.5">
-	
-	<display-name>Spring3 MVC Application</display-name>
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	     xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+	     version="2.4">
 
+    <display-name>ksu-capstone-project-app</display-name>
+    
+   <!--
+		- Location of the XML file that defines the root application context.
+		- Applied by ContextLoaderListener.
+	-->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+        	classpath:spring/application-config.xml,
+            classpath:spring/dao-spring-config.xml,
+            classpath:spring/service-spring-config.xml,
+            classpath:spring/webservicerest-spring-config.xml
+        </param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    
+    
+    <!--
+		- Servlet that dispatches request to registered handlers (Controller implementations).
+	-->
+    <servlet>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+        <param-name>contextConfigLocation</param-name>
+	        <param-value>
+	        	classpath:spring/application-config.xml,
+	            classpath:spring/dao-spring-config.xml,
+	            classpath:spring/service-spring-config.xml,
+	            classpath:spring/webservicerest-spring-config.xml
+	        </param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    
 	<servlet>
-		<servlet-name>spring-web</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
-		<!-- 
-		<init-param>
-			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/spring-mvc-config.xml</param-value>
-		</init-param>
-		 -->
-	</servlet>
-	
-	
-	<servlet>
-		<servlet-name>jersey-serlvet</servlet-name>
-		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
-		<init-param>
-			<param-name>com.sun.jersey.config.property.packages</param-name>
-			<param-value>com.capstone.project</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	
+		<servlet-name>CXFServlet</servlet-name>
+		<display-name>CXF Servlet</display-name>
+		<servlet-class>
+			org.apache.cxf.transport.servlet.CXFServlet
+		</servlet-class>
+		
+	    <!-- Enable asynchronous requests --> 
+	    <async-supported>true</async-supported>	
+	    	
+		<load-on-startup>2</load-on-startup>
+	</servlet>    
+
+    <servlet-mapping>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
 
 	<servlet-mapping>
-		<servlet-name>spring-web</servlet-name>
-		<url-pattern>/</url-pattern>
-	</servlet-mapping>
-	
-	<servlet-mapping>
-		<servlet-name>jersey-serlvet</servlet-name>
-		<url-pattern>/rest/*</url-pattern>
-	</servlet-mapping>
-	
+		<servlet-name>CXFServlet</servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>    
 
 </web-app>
