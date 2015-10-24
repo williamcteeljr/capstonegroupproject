@@ -1,11 +1,14 @@
 //Define an angular module for our app
-var sampleApp = angular.module('sampleApp', []);
+var sampleApp = angular.module('app',
 
-//Define Routing for app
-//Uri /AddNewOrder -> template AddOrder.html and Controller AddOrderController
-//Uri /ShowOrders -> template ShowOrders.html and Controller AddOrderController
+	['ui.bootstrap']
+);
+
+
+
+
 sampleApp.config([ '$routeProvider', function($routeProvider) {
-	$routeProvider.when('/', {
+	$routeProvider.when('/Home', {
 		templateUrl : '/landing/home.html',
 		controller : 'HomeController',
 		controllerAs: 'vm'
@@ -13,13 +16,17 @@ sampleApp.config([ '$routeProvider', function($routeProvider) {
 		templateUrl : '/landing/donate.html',
 		controller : 'DonateController',
 		controllerAs: 'vm'
-	}).when('/Login', {
-		templateUrl : '/login/login.view.html',
-		controller : 'LoginController',
+	}).when('/Register', {
+		templateUrl : '/landing/register.html',
+		controller : 'RegisterController',
 		controllerAs: 'vm'
-	}).when('/Family', {
-		templateUrl : '/landing/family.html',
-		controller : 'FamilyController',
+	}).when('/Faq', {
+		templateUrl : '/landing/faq.html',
+		controller : 'FaqController',
+		controllerAs: 'vm'
+	}).when('/AboutUs', {
+		templateUrl : '/landing/aboutus.html',
+		controller : 'AboutUsController',
 		controllerAs: 'vm'
 	}).when('/Admin', {
 		templateUrl : '/landing/admin.html',
@@ -30,11 +37,25 @@ sampleApp.config([ '$routeProvider', function($routeProvider) {
 		controller : 'ContactController',
 		controllerAs: 'vm'
 	}).otherwise({
-		redirectTo : '/Home'
+		redirectTo : '/Admin'
 	});
 } ]);
 
+
+
+sampleApp.controller('FaqController', function($scope) {
+
+	$scope.message = 'This is Add new order screen';
+
+});
+
 sampleApp.controller('HomeController', function($scope) {
+
+	$scope.message = 'This is Add new order screen';
+
+});
+
+sampleApp.controller('RegisterController', function($scope) {
 
 	$scope.message = 'This is Add new order screen';
 
@@ -46,7 +67,7 @@ sampleApp.controller('DonateController', function($scope) {
 
 });
 
-sampleApp.controller('FamilyController', function($scope) {
+sampleApp.controller('AboutUsController', function($scope) {
 
 	$scope.message = 'This is Show orders screen';
 
