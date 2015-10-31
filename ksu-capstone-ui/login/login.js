@@ -1,53 +1,76 @@
+angular.module('login')
+    .controller('LoginValidateController',['$scope','$http',
 
-function getTestREst() {
 
-    var jsontext = '{ "userName" : "amin" , "passWord": "amin"}';
-    var user = JSON.parse(jsontext);
+    function ($scope, $http) {
 
-    jQuery.ajax({
-        type: "POST",
-        url: "http://localhost:8090/ksu-capstone-project-app/rest/userservice/userauth",
-        data: user,
-        dataType :"json",
-        contentType:"application/json",
-        accept:"application/json",
-        //crossDomain: true,
 
-        success : function(data, status, jqXHR) {
-            $('#reply').html(data);
-            alert(data.toString());
-        },
-
-        error : function(jqXHR, status) {
+        if($scope.username ==='admin' && $scope.passWord==='admin'){
+            alert('Login success');
+            return true;
         }
-    });
-}
 
+        $scope.validatelogin = function() {
+            var data = $.param({
+                json: JSON.stringify({
+                    userName: $scope.username,
+                    passWord: $scope.password
 
+                })
+            });
 
+            $http.post("http://localhost:8090/ksu-capstone-project-app/rest/userservice/userauth", data)
+                .success(function(data, status) {
+                 alert(data.toString);
+            })
 
-
-function getTestGet() {
-
-    var username= $("#username").val();
-    var password=$("#password").val();
-    var url= 'http://localhost:8090/ksu-capstone-project-app/rest/userservice/userServ?userName='+
-            username+'&passWord='+password;
-    jQuery.ajax({
-        type: "GET",
-        url: url,
-
-        success : function(data, status, jqXHR) {
-            // $('#reply').html(data);
-            $('#loginpop').hide();
-            $("#username").val(' ');
-            $("#password").val(' ');
-        },
-
-        error : function(jqXHR, status) {
-            alert('login failed please try again');
         }
-    });
-}
+
+        var init = function () {
+        };
+
+        init();
+
+    }]);
+
+angular.module('login')
+    .controller('LoginValidateController',['$scope','$http',
 
 
+var LoginController = function ($scope, $modalInstance , $http) {
+    $scope.form = {};
+    //$scope.search = {};
+    //$scope.search.completed = '';
+    //$scope.history = workoutHistoryTracker.getHistory();
+
+
+    $scope.ok = function () {
+        $modalInstance.close();
+    };
+
+
+
+    $scope.validatelogin = function() {
+
+        // var data = { userName : 'admin' ,  passWord : 'admin' };
+
+        /*    var data = { userName : $scope.form.username ,
+         passWord : $scope.form.password };*/
+
+        var data = JSON.stringify({ userName : $scope.form.username
+            , passWord : $scope.form.password });
+
+        $http.post("http://localhost:8090/ksu-capstone-project-app/rest/userservice/userauth", data)
+            .success(function(data, status) {
+                alert('successfully logged in ');
+                $modalInstance.close();
+            })
+    }
+
+
+};
+LoginController['$inject'] = ['$scope', '$modalInstance' , '$http'];
+
+$scope.$on('$routeChangeSuccess', function (e, current,previous) {
+    $scope.currentRoute = current;
+});

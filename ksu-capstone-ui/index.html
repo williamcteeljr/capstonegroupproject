@@ -7,26 +7,8 @@
    <link rel="stylesheet" href="app-content/styles.css">
 
     <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/cosmo/bootstrap.min.css" rel="stylesheet" />
-    <link href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.0/animate.min.css" rel="stylesheet" />
     <link href="//fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700" rel="stylesheet" type="text/css" />
 
-
-
-
-
-
-    <script type="text/javascript">
-        function showLoginpop() {
-            document.getElementById("loginpop").style.display = 'block';
-        }
-    </script>
-
-
-    <script type="text/javascript">
-        function test() {
-            alert('hello');
-        }
-    </script>
 
 </head>
 
@@ -34,62 +16,16 @@
 <body ng-app="app"  style="background-color:#00FFFF" ng-controller="RootController">
 
 
-    <div class="navbar navbar-default navbar-fixed-top top-navbar">
+    <div id="login" class="navbar navbar-default navbar-fixed-top top-navbar">
         <div class="container-fluid">
-            <div class="navbar-header">
-                <!--<h1>7 Minute Workout</h1>-->
-                <div class="navbar-brand">Personal Trainer</div>
-            </div>
             <ul class="nav navbar-nav navbar-right">
-                <li><a ng-click="loginShow()" title="Workout History">History</a></li>
+                <li><a ng-click="loginShow()" title="Workout History">Log In</a></li>
             </ul>
-        </div>
-        <div id="top-nav-container" class="second-top-nav">
-            <div id="top-nav" ng-include="currentRoute.topNav">
-            </div>
         </div>
     </div>
 
-<div id="loginpop" style="display: none;position: absolute;
-                          padding-top: 300px;z-index: 100;padding-left: 1000px;
-                          width: 300px;height: 300px;
-                         ">
-
-    <table style="background: ghostwhite; border-style: solid;
-                          border-width: 15px;">
-
-       <tr><td><label>Username</label></td>
-           <td><input type="text" name="username" id="username" /></td>
-       </tr>
-       <tr>
-           <td>
-               <label >Password</label>
-           </td>
-           <td>
-               <input type="password" name="password" id="password"/>
-           </td>
-       </tr>
-       <tr>
-           <td>
-               <button onclick="getTestGet()">Login</button>
-           </td>
-           <td>
-               <button>Register</button>
-           </td>
-       </tr>
-
-   </table>
-
-</div>
-
-
 <div id="top"   class= "title">Happy Holiday Donors</div>
 
-
-
-<div id="login">
-<a href="#" onclick="showLoginpop()">Login</a>
-</div>
 <div id='cssmenu' >
 	<ul>
 	   <li><a href='#Home'><span>Home</span></a></li>
@@ -112,17 +48,13 @@
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular-sanitize.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular-animate.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular-messages.js"></script>
-
-   <!-- <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>-->
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.js"></script>
+
     <script src="app.js"></script>
     <script src="root.js"></script>
     <script src="login/login.js"></script>
-
- <!--   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
+    <script src="register/register.js"></script>
+    <script src="donate/donate.js"></script>
 
 
 </body>

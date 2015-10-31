@@ -1,86 +1,47 @@
-//Define an angular module for our app
-var sampleApp = angular.module('app',
+'use strict';
 
-	['ui.bootstrap']
-);
-
+angular.module('app', ['ngRoute', 'ui.bootstrap','ngMessages', 'register', 'login', 'donate']).
+	config(function ($routeProvider ,  $sceDelegateProvider ) {
 
 
+		$routeProvider.when('/Home', { templateUrl: 'landing/home.html' });
+		$routeProvider.when('/Donate',
+			{ templateUrl: 'donate/donate.html',
+			controller: 'StoreController'
+		});
 
-sampleApp.config([ '$routeProvider', function($routeProvider) {
-	$routeProvider.when('/Home', {
-		templateUrl : '/landing/home.html',
-		controller : 'HomeController',
-		controllerAs: 'vm'
-	}).when('/Donate', {
-		templateUrl : '/landing/donate.html',
-		controller : 'DonateController',
-		controllerAs: 'vm'
-	}).when('/Register', {
-		templateUrl : '/landing/register.html',
-		controller : 'RegisterController',
-		controllerAs: 'vm'
-	}).when('/Faq', {
-		templateUrl : '/landing/faq.html',
-		controller : 'FaqController',
-		controllerAs: 'vm'
-	}).when('/AboutUs', {
-		templateUrl : '/landing/aboutus.html',
-		controller : 'AboutUsController',
-		controllerAs: 'vm'
-	}).when('/Admin', {
-		templateUrl : '/landing/admin.html',
-		controller : 'AdminController',
-		controllerAs: 'vm'
-	}).when('/Contact', {
-		templateUrl : '/landing/contact.html',
-		controller : 'ContactController',
-		controllerAs: 'vm'
-	}).otherwise({
-		redirectTo : '/Admin'
+		$routeProvider.when('/Admin', { templateUrl: 'landing/admin.html' });
+		$routeProvider.when('/Contact', { templateUrl: 'landing/contact.html' });
+		$routeProvider.when('/AboutUs', { templateUrl: 'landing/aboutus.html' });
+		$routeProvider.when('/Register', { templateUrl: 'landing/register.html' });
+
+        $routeProvider.otherwise({ redirectTo: '/Home' });
+
+
+
+		$routeProvider.when('/register/family', {
+			templateUrl: 'register/family.html',
+			controller: 'RegisterFamilyController'
+		});
+
+		$routeProvider.when('/register/conformation', {
+			templateUrl: 'register/conformation.html'
+		});
+
+
+		$routeProvider.when('/register/donar', {
+			templateUrl: 'register/donar.html',
+			controller: 'RegisterDonarController'
+		});
+
+		$sceDelegateProvider.resourceUrlWhitelist([
+			// Allow same origin resource loads.
+			'self',
+			// Allow loading from our assets domain.  Notice the difference between * and **.
+			'http://!*.youtube.com/!**']);
 	});
-} ]);
 
 
-
-sampleApp.controller('FaqController', function($scope) {
-
-	$scope.message = 'This is Add new order screen';
-
-});
-
-sampleApp.controller('HomeController', function($scope) {
-
-	$scope.message = 'This is Add new order screen';
-
-});
-
-sampleApp.controller('RegisterController', function($scope) {
-
-	$scope.message = 'This is Add new order screen';
-
-});
-
-sampleApp.controller('DonateController', function($scope) {
-
-	$scope.message = 'This is Show orders screen';
-
-});
-
-sampleApp.controller('AboutUsController', function($scope) {
-
-	$scope.message = 'This is Show orders screen';
-
-});
-
-sampleApp.controller('ContactController', function($scope) {
-
-	$scope.message = 'This is Show orders screen';
-
-});
-
-sampleApp.controller('AdminController', function($scope) {
-
-	$scope.message = 'This is Show orders screen';
-
-});
+angular.module('register', []);
+angular.module('login', []);
+angular.module('donate', []);
