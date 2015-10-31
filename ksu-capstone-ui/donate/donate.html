@@ -1,0 +1,50 @@
+<div class="list-group middle">
+<!--  Product Container  -->
+<div class="list-group-item" ng-repeat="product in products">
+    <h3>{{product.name}} <em class="pull-right">{{product.price | currency}}</em></h3>
+
+    <!-- Image Gallery  -->
+    <div class="gallery">
+        <div class="img-wrap">
+            <img ng-src="{{product.images[0]}}" />
+        </div>
+        <ul class="img-thumbnails clearfix">
+            <li class="small-image pull-left thumbnail" >
+                <img ng-src="{{product.images[0]}}" />
+            </li>
+        </ul>
+    </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<!--
+<!DOCTYPE html>
+<html>
+
+<head>
+ <link rel="stylesheet" href="app-content/styles.css">
+<title>Donate</title>
+</head>
+<body >
+	<div  class="middle" >Donate
+
+
+        <img src="images/donate.jpeg"  width="600" height="347" />
+
+    </div>
+</body>
+</html>
+
+-->
+
+
+
+
+
