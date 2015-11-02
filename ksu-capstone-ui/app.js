@@ -42,6 +42,13 @@ angular.module('app', ['ngRoute', 'ui.bootstrap','ngMessages', 'register', 'logi
 			templateUrl: 'register/family-conform.html'
 		});
 
+		$routeProvider.when('/donate/familydonation', {
+			templateUrl: 'donate/family-donation.html'
+		});
+
+		$routeProvider.when('/donate/conformation', {
+			templateUrl: 'donate/donate-conformation.html'
+		});
 
 		$routeProvider.otherwise({ redirectTo: '/Home' });
 

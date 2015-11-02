@@ -1,24 +1,30 @@
-<div class="list-group middle">
+
+<div  class="middle" >
+<div class="list-group middle"  style="height: 80%">
 <!--  Product Container  -->
-<div class="list-group-item" ng-repeat="product in products">
-    <h3>{{product.name}} <em class="pull-right">{{product.price | currency}}</em></h3>
+    <div class="list-group-item" ng-repeat="product in products">
+        <h3>{{product.name}} <em class="pull-right">{{product.price | currency}}</em></h3>
 
-    <!-- Image Gallery  -->
-    <div class="gallery">
-        <div class="img-wrap">
-            <img ng-src="{{product.images[0]}}" />
-        </div>
-        <ul class="img-thumbnails clearfix">
-            <li class="small-image pull-left thumbnail" >
+        <!-- Image Gallery  -->
+        <div class="gallery">
+            <div class="img-wrap">
                 <img ng-src="{{product.images[0]}}" />
-            </li>
-        </ul>
+            </div>
+            <ul class="img-thumbnails clearfix">
+                <li class="small-image pull-left thumbnail" >
+                    <img ng-src="{{product.images[0]}}" />
+                </li>
+            </ul>
+        </div>
     </div>
+
+
+
 </div>
+
+
+    <a href="#/donate/familydonation" class="btn btn-primary">  Select Family </a>
 </div>
-
-
-
 
 
 
