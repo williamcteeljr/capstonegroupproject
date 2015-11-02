@@ -1,6 +1,73 @@
 
-<div ng-app="register" class="middle" style="background-color:#E5E4E2">
+<div ng-app="register" class="middle" style="background-color:#E5E4E2;width: 1200px">
 
-  Donar
+  <table style="width: 60%"><tr>
+    <td>
+
+      <div id="infocontainer">
+        <div class=row> <div class=col-md-6>
+          <input id=name ng-model=myForm.name > Name <br/>
+          <input id=email ng-model=myForm.email > Email <br/>
+          <input id=phone ng-model=myForm.phone > Phone <br/>
+          <input id=password ng-model=myForm.pass > password <br/>
+          <input id=address ng-model=myForm.add > Address <br/>
+          <input id=city ng-model=myForm.city > City <br/>
+          <label for="text">Family Biography</label>:
+          <textarea id="text" cols="70" rows="7" my-maxlength="5" ng-model="textareaText">Family Bio</textarea>
+          <button ng-click="myForm.submitTheForm()">Submit Form</button> </div> </div>
+      </div>
+
+    </td>
+    <td>
+
+      <div id="piccontainer">
+
+        <table>
+         <tr>
+           <td>child
+
+           </td>
+           <td>
+             wishList
+           </td>
+          </tr>
+          <tr>
+            <td>
+              Name <input id=email ng-model=myForm.email ><br/>
+              <input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this.files)"/>
+
+
+            </td>
+            <td>
+
+              Item 1  <input id=email ng-model=myForm.email >
+              <input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this.files)"/>
+              <br/>
+
+              Item 2  <input id=email ng-model=myForm.email >
+              <input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this.files)"/>
+              <br/>
+
+              Item 3  <input id=email ng-model=myForm.email >
+              <input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this.files)"/>
+              <br/>
+
+            </td>
+          </tr>
+
+
+
+        </table>
+
+
+      </div>
+
+    </td>
+  </tr>
+  </table>
+
+
+  <a href="#/register/donar/conformation" class="btn btn-primary">Submit</a>
 
 </div>
+

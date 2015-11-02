@@ -22,9 +22,24 @@ angular.module('app')
               $modalInstance.close();
           };
 
+          $scope.register = function() {
+              $modalInstance.close();
+
+              var dailog = $modal.open({
+                  templateUrl: 'register/register.view.html',
+                  controller : RegisterLoginController
+              });
+          }
 
 
           $scope.validatelogin = function() {
+
+              if($scope.form.username === 'admin' && $scope.form.password === 'admin'){
+
+                  alert('success');
+                  $modalInstance.close();
+                  return true;
+              }
 
              // var data = { userName : 'admin' ,  passWord : 'admin' };
 

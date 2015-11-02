@@ -15,7 +15,7 @@ angular.module('app', ['ngRoute', 'ui.bootstrap','ngMessages', 'register', 'logi
 		$routeProvider.when('/AboutUs', { templateUrl: 'landing/aboutus.html' });
 		$routeProvider.when('/Register', { templateUrl: 'landing/register.html' });
 
-        $routeProvider.otherwise({ redirectTo: '/Home' });
+
 
 
 
@@ -33,6 +33,17 @@ angular.module('app', ['ngRoute', 'ui.bootstrap','ngMessages', 'register', 'logi
 			templateUrl: 'register/donar.html',
 			controller: 'RegisterDonarController'
 		});
+
+		$routeProvider.when('/register/donar/conformation', {
+			templateUrl: 'register/conformation.html'
+		});
+
+		$routeProvider.when('/register/family/conformation', {
+			templateUrl: 'register/family-conform.html'
+		});
+
+
+		$routeProvider.otherwise({ redirectTo: '/Home' });
 
 		$sceDelegateProvider.resourceUrlWhitelist([
 			// Allow same origin resource loads.
