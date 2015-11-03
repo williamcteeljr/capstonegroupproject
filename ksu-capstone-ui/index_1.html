@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+   <meta charset='utf-8'>
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="app-content/app.css">
+
+    <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/cosmo/bootstrap.min.css" rel="stylesheet" />
+    <link href="//fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700" rel="stylesheet" type="text/css" />
+
+
+</head>
+
+
+<body ng-app="app"  style="background-color:#00FFFF" ng-controller="RootController">
+
+
+    <div id="login" class="navbar navbar-default navbar-fixed-top top-navbar">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a ng-click="loginShow()" title="Workout History">Log In</a></li>
+            </ul>
+        </div>
+    </div>
+
+<div id="top"   class= "title">Happy Holiday Donors</div>
+
+<div id='cssmenu' >
+	<ul>
+	   <li><a href='#Home'><span>Home</span></a></li>
+	   <li><a href='#Donate'><span>Donate</span></a></li>
+	   <li><a href='#Register'><span>Register</span></a></li>
+	   <li><a href='#Faq'><span>FAQ</span></a></li>
+	   <li><a href='#AboutUs'><span>About US</span></a></li>
+	   <li><a href='#Admin'><span>Admin</span></a></li>
+	   <li><a href='#Contact'><span>Contact</span></a></li>
+	</ul>
+</div>
+
+<div ng-view ></div>
+
+<div class="footer">Footer</div>
+
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular-route.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular-sanitize.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular-animate.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular-messages.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.js"></script>
+
+    <script src="app.js"></script>
+    <script src="root.js"></script>
+    <script src="login/login.js"></script>
+    <script src="register/register.js"></script>
+    <script src="donate/donate.js"></script>
+
+
+</body>
+</html>
