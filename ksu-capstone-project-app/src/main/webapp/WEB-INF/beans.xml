@@ -13,10 +13,25 @@
 
 	<import resource="classpath:META-INF/cxf/cxf.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+	
+	
 
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/familydonations" />
+		<property name="username" value="root" />
+		<property name="password" value="" />
+	</bean>
+	
 
+	<bean id="userDao" class="com.capstone.project.dao.UserDaoImpl" >
+	    <property name="dataSource" ref="dataSource" />
+	</bean>
 
-	<bean id="uservalidate" class="com.capstone.project.user.validate.UserValidation" />
+	<bean id="uservalidate" class="com.capstone.project.user.validate.UserValidation" >
+	    <property name="userDao" ref="userDao" />
+	</bean>
 
 	<jaxrs:server id="user" address="/userservice">
 		<jaxrs:serviceBeans>

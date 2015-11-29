@@ -1,4 +1,6 @@
 com/capstone/project/user/ServiceStatus.class
-com/capstone/project/SpringMVCController.class
 com/capstone/project/user/User.class
+com/capstone/project/dao/UserDao.class
+com/capstone/project/dao/UserDaoImpl$1.class
+com/capstone/project/dao/UserDaoImpl.class
 com/capstone/project/user/validate/UserValidation.class

@@ -1,20 +1,15 @@
 package com.capstone.project.user;
 
-import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-/*
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement*/
+
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class User{
 
-	
-	
-	//@XmlElement (name="userName")
+
 	private String userName;
-	//@XmlElement (name="passWord")
 	private String passWord;
+	private String role;
 	
 	
 	public String getUserName() {
@@ -28,5 +23,11 @@ public class User{
 	}
 	public void setPassWord(String passWord) {
 		this.passWord = passWord;
+	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
 	}
 }

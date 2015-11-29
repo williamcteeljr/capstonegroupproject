@@ -1,4 +1,5 @@
 /Users/Achyut/git/capstonegroupproject/ksu-capstone-project-app/src/main/java/com/capstone/project/user/User.java
-/Users/Achyut/git/capstonegroupproject/ksu-capstone-project-app/src/main/java/com/capstone/project/SpringMVCController.java
+/Users/Achyut/git/capstonegroupproject/ksu-capstone-project-app/src/main/java/com/capstone/project/dao/UserDao.java
+/Users/Achyut/git/capstonegroupproject/ksu-capstone-project-app/src/main/java/com/capstone/project/dao/UserDaoImpl.java
 /Users/Achyut/git/capstonegroupproject/ksu-capstone-project-app/src/main/java/com/capstone/project/user/validate/UserValidation.java
 /Users/Achyut/git/capstonegroupproject/ksu-capstone-project-app/src/main/java/com/capstone/project/user/ServiceStatus.java
