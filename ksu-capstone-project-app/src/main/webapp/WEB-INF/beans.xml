@@ -13,8 +13,8 @@
 
 	<import resource="classpath:META-INF/cxf/cxf.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
-	
-	
+
+
 
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -23,14 +23,47 @@
 		<property name="username" value="root" />
 		<property name="password" value="" />
 	</bean>
-	
 
-	<bean id="userDao" class="com.capstone.project.dao.UserDaoImpl" >
-	    <property name="dataSource" ref="dataSource" />
+
+	<bean id="userDao" class="com.capstone.project.dao.UserDaoImpl">
+		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-	<bean id="uservalidate" class="com.capstone.project.user.validate.UserValidation" >
-	    <property name="userDao" ref="userDao" />
+	<bean id="donarDao" class="com.capstone.project.donar.DonarDaoImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="familyDao" class="com.capstone.project.family.FamilyDaoImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="adminDao" class="com.capstone.project.admin.AdminDaoImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+
+	<bean id="adminStatusDao" class="com.capstone.project.admin.status.AdminStatusDaoImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+
+	<bean id="donationDao" class="com.capstone.project.donation.DonationDaoImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	
+	<bean id="donationWishDao" class="com.capstone.project.donation.wish.DonationWishDaoImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="uservalidate" class="com.capstone.project.user.validate.UserValidation">
+		<property name="userDao" ref="userDao" />
+		<property name="donarDao" ref="donarDao" />
+		<property name="familyDao" ref="familyDao" />
+		<property name="adminDao" ref="adminDao" />
+		<property name="adminStatusDao" ref="adminStatusDao" />
+		<property name="donationDao" ref="donationDao" />
+		<property name="donationWishDao" ref="donationWishDao" />
 	</bean>
 
 	<jaxrs:server id="user" address="/userservice">
