@@ -3,14 +3,15 @@ package com.capstone.project.donation.wish;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
-import com.capstone.project.family.Child;
 import com.capstone.project.family.Wishitem;
 
 public class DonationWishDaoImpl implements DonationWishDao {
@@ -57,31 +58,34 @@ public class DonationWishDaoImpl implements DonationWishDao {
 		});
 
 
+		Set<String> childCheck =  new HashSet<String>();
+		
 		for (DonationChild c : childList) {
 
-			DonationWish d = new DonationWish();
-			DonationChild child = new DonationChild();
+			if(!childCheck.contains(c.name)){
+				childCheck.add(c.getName());
+				DonationWish d = new DonationWish();
+				DonationChild child = new DonationChild();
 
-			child.setImage(c.getName());
-			child.setName(c.getName());
+				child.setImage(c.getName());
+				child.setName(c.getName());
 
-			List<WishFamilyitem> wishlist = new ArrayList<WishFamilyitem>();
+				List<WishFamilyitem> wishlist = new ArrayList<WishFamilyitem>();
 
-			for (Wishitem w : wishList) {
-				WishFamilyitem i = null;
-				if (w.getChildname().equalsIgnoreCase(c.getName())) {
-					i = new WishFamilyitem();
-					i.setImage(w.getImage());
-					i.setName(w.getName());
-					wishlist.add(i);
+				for (Wishitem w : wishList) {
+					WishFamilyitem i = null;
+					if (w.getChildname().equalsIgnoreCase(c.getName())) {
+						i = new WishFamilyitem();
+						i.setImage(w.getImage());
+						i.setName(w.getName());
+						wishlist.add(i);
+					}
 				}
+
+				d.setChild(child);
+				d.setWishlist(wishlist);
+				wishes.add(d);				
 			}
-
-			d.setChild(child);
-			d.setWishlist(wishlist);
-
-			wishes.add(d);
-
 		}
 
 		return wishes;
