@@ -24,6 +24,9 @@ import com.capstone.project.donation.wish.DonationWish;
 import com.capstone.project.donation.wish.DonationWishDao;
 import com.capstone.project.donation.wish.DonationWishRequest;
 import com.capstone.project.donation.wish.DonationWishResponse;
+import com.capstone.project.donation.wish.submit.WishSubmitDao;
+import com.capstone.project.donation.wish.submit.WishSubmitRequest;
+import com.capstone.project.donation.wish.submit.WishSubmitResponse;
 import com.capstone.project.family.FamilyDTO;
 import com.capstone.project.family.FamilyDTOUI;
 import com.capstone.project.family.FamilyDao;
@@ -40,6 +43,7 @@ public class UserValidation {
 	private AdminStatusDao adminStatusDao;
 	private DonationDao donationDao;
 	private DonationWishDao donationWishDao;
+	private WishSubmitDao wishSubmitDao;
 
 	@POST
 	@Path("/userauth")
@@ -202,6 +206,26 @@ public class UserValidation {
 		}
 		return a;
 	}
+	
+	
+	
+	
+	@POST
+	@Path("/donation/final/submit")
+	@Consumes({ "application/json" })
+	@Produces({ "application/json" })
+	public WishSubmitResponse doFinalSubmit(WishSubmitRequest r) {
+		
+		WishSubmitResponse a = null;
+		
+		if (r != null) {
+		
+			 a = wishSubmitDao.finalSubmitDonation(r);
+			
+		}
+		return a;
+	}
+	
 
 	public DonarDao getDonarDao() {
 		return donarDao;
@@ -249,6 +273,14 @@ public class UserValidation {
 
 	public void setDonationWishDao(DonationWishDao donationWishDao) {
 		this.donationWishDao = donationWishDao;
+	}
+
+	public WishSubmitDao getWishSubmitDao() {
+		return wishSubmitDao;
+	}
+
+	public void setWishSubmitDao(WishSubmitDao wishSubmitDao) {
+		this.wishSubmitDao = wishSubmitDao;
 	}
 
 }

@@ -26,7 +26,7 @@ public class DonationWishDaoImpl implements DonationWishDao {
 		String sql1 = "select * from familydonations.child where familyId='%s'";
 		sql1 = String.format(sql1, familyId);
 
-		String sql2 = "select * from familydonations.wishitem where familyId='%s'";
+		String sql2 = "select * from familydonations.wishitem where familyId='%s' and status <> 'COMPLETED' ";
 		sql2 = String.format(sql2, familyId);
 
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);

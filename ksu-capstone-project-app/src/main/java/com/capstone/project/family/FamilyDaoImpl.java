@@ -279,6 +279,7 @@ public class FamilyDaoImpl implements FamilyDao {
 			//@Override
 			public void setValues(PreparedStatement ps, int i) throws SQLException {
 				Child w = childList.get(i);
+				
 				ps.setString(1, w.getName());
 				ps.setString(2, w.getImage());
 				ps.setString(3, w.getWishname() );
