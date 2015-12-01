@@ -19,30 +19,37 @@ public class UserDaoImpl implements UserDao {
 	public List<User> getUserList() {
 
 		List<User> userList = new ArrayList<User>();
-		String sql = "select * from familydonations.USER_APP";
+		String sql = "select * from familydonations.USER";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		userList = jdbcTemplate.query(sql, new RowMapper<User>() {
 
 			@Override
 			public User mapRow(ResultSet rs, int rownumber) throws SQLException {
 				User e = new User();
-				e.setUserName(rs.getString(1));
-				e.setPassWord(rs.getString(2));
+				e.setUsername(rs.getString(1));
+				e.setPassword(rs.getString(2));
 				e.setRole(rs.getString(3));
 				return e;
 			}
 		});
 		return userList;
 	}
+	
+	
+	
+	
 
 	public void registerUser(User user) {
 
-		String sql = "INSERT INTO familydonations.USER_APP (username, password ,role) VALUES ('%s', '%s' ,'%s')";
-		sql=String.format(sql, user.getUserName(), user.getPassWord() , user.getRole());
+		String sql = "INSERT INTO familydonations.USER (username, password ,role) VALUES ('%s', '%s' ,'%s')";
+		sql=String.format(sql, user.getUsername(), user.getPassword() , user.getRole());
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		
 		jdbcTemplate.update(sql);
 	}
+	
+	
+	
 
 	public DataSource getDataSource() {
 		return dataSource;

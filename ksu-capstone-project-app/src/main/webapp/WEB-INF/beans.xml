@@ -59,6 +59,10 @@
 	<bean id="wishSubmitDao" class="com.capstone.project.donation.wish.submit.WishSubmitDaoImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	
+	<bean id="familyTransactionDao" class="com.capstone.project.family.transaction.FamilyTransactionDaoImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 
 	<bean id="uservalidate" class="com.capstone.project.user.validate.UserValidation">
 		<property name="userDao" ref="userDao" />
@@ -69,6 +73,7 @@
 		<property name="donationDao" ref="donationDao" />
 		<property name="donationWishDao" ref="donationWishDao" />
 		<property name="wishSubmitDao" ref="wishSubmitDao" />
+		<property name="familyTransactionDao" ref="familyTransactionDao" />
 	</bean>
 
 	<jaxrs:server id="user" address="/userservice">

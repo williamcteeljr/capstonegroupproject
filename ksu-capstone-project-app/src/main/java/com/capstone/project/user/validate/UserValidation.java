@@ -15,6 +15,7 @@ import com.capstone.project.admin.AdminResponse;
 import com.capstone.project.admin.status.AdminStatusDao;
 import com.capstone.project.admin.status.AdminStatusRequest;
 import com.capstone.project.admin.status.AdminStatusResponse;
+import com.capstone.project.dao.LoginResponse;
 import com.capstone.project.dao.UserDao;
 import com.capstone.project.donar.DonarDTO;
 import com.capstone.project.donar.DonarDao;
@@ -30,6 +31,9 @@ import com.capstone.project.donation.wish.submit.WishSubmitResponse;
 import com.capstone.project.family.FamilyDTO;
 import com.capstone.project.family.FamilyDTOUI;
 import com.capstone.project.family.FamilyDao;
+import com.capstone.project.family.transaction.FamilyTransactionDao;
+import com.capstone.project.family.transaction.FamilyTransactionRequest;
+import com.capstone.project.family.transaction.FamilyTransactionResponse;
 import com.capstone.project.user.ServiceStatus;
 import com.capstone.project.user.User;
 
@@ -44,6 +48,7 @@ public class UserValidation {
 	private DonationDao donationDao;
 	private DonationWishDao donationWishDao;
 	private WishSubmitDao wishSubmitDao;
+	private FamilyTransactionDao familyTransactionDao;
 
 	@POST
 	@Path("/userauth")
@@ -53,8 +58,8 @@ public class UserValidation {
 		ServiceStatus s = new ServiceStatus();
 		s.setMessageStatus("Fail");
 		if (user != null) {
-			if (user.getUserName().equalsIgnoreCase("admin")
-					&& user.getPassWord().equalsIgnoreCase("admin")) {
+			if (user.getUsername().equalsIgnoreCase("admin")
+					&& user.getPassword().equalsIgnoreCase("admin")) {
 
 				s.setMessageStatus("Success");
 
@@ -67,7 +72,55 @@ public class UserValidation {
 
 		return s;
 	}
+	
+	
+	
+	@POST
+	@Path("/userauth/validate")
+	@Consumes({ "application/json" })
+	@Produces({ "application/json" })
+	public LoginResponse doValidateUser(User user) {
+		
+		LoginResponse r = new LoginResponse();
+		r.setStatus("fail");
+		if (user != null) {
+			List<User> userList = userDao.getUserList();
+			
+			for (User u : userList) {
+				if (u.getUsername().equalsIgnoreCase(user.getUsername())
+						&& u.getPassword().equalsIgnoreCase(user.getPassword())) {
+					r.setStatus("Success");
+					r.setUsername(u.getUsername());
+					r.setRole(u.getRole());
+					break;
+				}
+			}
+		}
 
+		return r;
+	}
+	
+	
+	
+	
+	
+	
+	@POST
+	@Path("/transaction/family")
+	@Consumes({ "application/json" })
+	@Produces({ "application/json" })
+	public FamilyTransactionResponse getFamilyTransaction(
+			FamilyTransactionRequest request) {
+		FamilyTransactionResponse r = new FamilyTransactionResponse();
+		r.setMessage("Fail");
+		if (request != null) {
+			r = familyTransactionDao.finalSubmitDonation(request.getFamilyId());
+		}
+		return r;
+	}
+	
+	
+	
 	public UserDao getUserDao() {
 		return userDao;
 	}
@@ -120,8 +173,8 @@ public class UserValidation {
 
 			s.setMessageStatus("Success");
 			User u = new User();
-			u.setUserName(d.getUsername());
-			u.setPassWord(d.getPassword());
+			u.setUsername(d.getUsername());
+			u.setPassword(d.getPassword());
 			u.setRole(d.getRole());
 			userDao.registerUser(u);
 			donarDao.registerDonar(d);
@@ -141,8 +194,8 @@ public class UserValidation {
 		if (d != null) {
 			s.setMessageStatus("Success");
 			User u = new User();
-			u.setUserName(d.getUsername());
-			u.setPassWord(d.getPassword());
+			u.setUsername(d.getUsername());
+			u.setPassword(d.getPassword());
 			u.setRole(d.getRole());
 			userDao.registerUser(u);
 			familyDao.registerFamily(d);
@@ -281,6 +334,18 @@ public class UserValidation {
 
 	public void setWishSubmitDao(WishSubmitDao wishSubmitDao) {
 		this.wishSubmitDao = wishSubmitDao;
+	}
+
+
+
+	public FamilyTransactionDao getFamilyTransactionDao() {
+		return familyTransactionDao;
+	}
+
+
+
+	public void setFamilyTransactionDao(FamilyTransactionDao familyTransactionDao) {
+		this.familyTransactionDao = familyTransactionDao;
 	}
 
 }
