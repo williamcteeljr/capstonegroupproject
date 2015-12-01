@@ -64,10 +64,11 @@ public class DonationWishDaoImpl implements DonationWishDao {
 
 			if(!childCheck.contains(c.name)){
 				childCheck.add(c.getName());
+				
 				DonationWish d = new DonationWish();
 				DonationChild child = new DonationChild();
 
-				child.setImage(c.getName());
+				child.setImage(c.getImage());
 				child.setName(c.getName());
 
 				List<WishFamilyitem> wishlist = new ArrayList<WishFamilyitem>();

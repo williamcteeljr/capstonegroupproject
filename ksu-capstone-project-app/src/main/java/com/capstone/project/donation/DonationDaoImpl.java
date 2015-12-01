@@ -35,6 +35,7 @@ public class DonationDaoImpl implements DonationDao {
 						a.setUsername(rs.getString("username"));
 						a.setName(rs.getString("name"));
 						a.setCity(rs.getString("city"));
+						a.setProfilepicture(rs.getString("picturename"));
 
 						return a;
 					}

@@ -57,5 +57,5 @@ public class DonarTransactionDaoImpl implements DonarTransactionDao {
 
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
-	}	
+	}
 }
