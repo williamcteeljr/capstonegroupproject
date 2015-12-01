@@ -19,6 +19,9 @@ import com.capstone.project.dao.LoginResponse;
 import com.capstone.project.dao.UserDao;
 import com.capstone.project.donar.DonarDTO;
 import com.capstone.project.donar.DonarDao;
+import com.capstone.project.donar.transaction.DonarTransactionDao;
+import com.capstone.project.donar.transaction.DonarTransactionRequest;
+import com.capstone.project.donar.transaction.DonarTransactionResponse;
 import com.capstone.project.donation.DonationDao;
 import com.capstone.project.donation.DonationFamilyResponse;
 import com.capstone.project.donation.wish.DonationWish;
@@ -49,6 +52,7 @@ public class UserValidation {
 	private DonationWishDao donationWishDao;
 	private WishSubmitDao wishSubmitDao;
 	private FamilyTransactionDao familyTransactionDao;
+	private DonarTransactionDao donarTransactionDao;
 
 	@POST
 	@Path("/userauth")
@@ -115,6 +119,22 @@ public class UserValidation {
 		r.setMessage("Fail");
 		if (request != null) {
 			r = familyTransactionDao.finalSubmitDonation(request.getFamilyId());
+		}
+		return r;
+	}
+	
+	
+	
+	@POST
+	@Path("/transaction/donar")
+	@Consumes({ "application/json" })
+	@Produces({ "application/json" })
+	public DonarTransactionResponse getTransactions(
+			DonarTransactionRequest request) {
+		DonarTransactionResponse r = new DonarTransactionResponse();
+		r.setMessage("Fail");
+		if (request != null) {
+			r = donarTransactionDao.finalSubmitTransactionRequest(request.getUserId());
 		}
 		return r;
 	}
@@ -346,6 +366,18 @@ public class UserValidation {
 
 	public void setFamilyTransactionDao(FamilyTransactionDao familyTransactionDao) {
 		this.familyTransactionDao = familyTransactionDao;
+	}
+
+
+
+	public DonarTransactionDao getDonarTransactionDao() {
+		return donarTransactionDao;
+	}
+
+
+
+	public void setDonarTransactionDao(DonarTransactionDao donarTransactionDao) {
+		this.donarTransactionDao = donarTransactionDao;
 	}
 
 }
