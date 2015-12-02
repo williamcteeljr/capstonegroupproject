@@ -2,6 +2,11 @@ package com.capstone.project.family;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+/**
+ * 
+ * @author Achyut
+ *
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class FamilyDTOUI {
 	
@@ -28,10 +33,7 @@ public class FamilyDTOUI {
     private String wishlist2image_0;
     private String wishlist3_0;
     private String wishlist3image_0;
-    
-    
-   
-    
+        
     private String childimage_1;
     private String wishlist1image_1;
     private String wishlist2image_1;
